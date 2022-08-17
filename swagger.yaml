@@ -1,0 +1,159 @@
+openapi: "3.0.0"
+info:
+  title: Employement API
+  description: This is my company API Documentation
+  version: 1.0
+  contact:
+    email: syosas@gmail.com
+  liscence:
+    name: Apache 2.0
+    url: "http://www.apache.org/liscences/LIS"
+  servers:
+    -url: http://localhost:8070
+    description: THis is my local Server
+    -url: http://example.com/
+    description: This is my original URL
+schemes: [https,http]
+
+paths:  
+  /api/v1/employee/list:
+    get:
+      summary: Returns a list of employees
+      description: Employees list
+      responses:
+        200:
+          description: successful
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                number:
+                  type: int
+                email:
+                  type: string
+                gender:
+                  type: string
+                photo:
+                  type: string
+
+  /api/v1/employee/{id}:
+    get:
+      summary: Returns an employee
+      description: Employee
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              type: object
+
+  /api/v1/employee/add:
+    post:
+      summary: add a new employee
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/components/schemas/Employee'
+      responses:
+        200:
+          description: Ok
+
+  /api/v1/employee/update/{id}:
+    put:
+      summary: update an employee
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+            example:
+              first_name: ""
+              last_name: ""
+              gender: ""
+              email: ""
+              number: ""
+              photo: ""
+      responses:
+        '200':
+          description:'Ok'
+
+  /api/v1/employee/delete/{id}:
+    delete:
+      summary: delete an employee
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : string
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              type: object
+
+components:
+     schemas:
+       Employee:
+        type: object
+        required:
+          - first_name
+          - last_name
+          - number
+          - email
+          - gender
+          - photo
+        properties:
+           first_name:
+              type: string
+              descriotion: employee first name
+           last_name:
+              type: string
+              descriotion: employee last name
+           number:
+              type: int
+              descriotion: employee number
+           email:
+               type: string
+               description: employee email
+           gender:
+               type: string
+               description: employee gender
+           photo:
+               type: image
+               description: employee image
+        example:
+           first_name: Kavindu
+           last_name: Samaradivakara
+           number: 767439249
+           email: kavinu@gmail.com
+           photo: 
+
+
+             
+              
+
+ 
