@@ -36,8 +36,6 @@ paths:
                   type: string
                 gender:
                   type: string
-                photo:
-                  type: string
 
   /api/v1/employee/{id}:
     get:
@@ -93,7 +91,6 @@ paths:
               gender: ""
               email: ""
               number: ""
-              photo: ""
       responses:
         '200':
           description:'Ok'
@@ -125,7 +122,6 @@ components:
           - number
           - email
           - gender
-          - photo
         properties:
            first_name:
               type: string
@@ -142,15 +138,11 @@ components:
            gender:
                type: string
                description: employee gender
-           photo:
-               type: image
-               description: employee image
         example:
            first_name: Kavindu
            last_name: Samaradivakara
            number: 767439249
            email: kavinu@gmail.com
-           photo: 
 
 
              
