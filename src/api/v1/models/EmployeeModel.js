@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
+  _id: { type: String },
   first_name: { type: String, required: true, min: 6, max: 10 },
   last_name: { type: String, required: true, min: 6, max: 10 },
   email: { type: String, required: true, unique: true, sparse: true },
