@@ -1,18 +1,17 @@
-const Joi = require('joi');
+const { validationResult, check } = require('express-validator');
 
-const empSchema = Joi.object({
-  first_name: Joi.string().min(6).max(10).required(),
-  last_name: Joi.string().min(6).max(10).required(),
-  email: Joi.string().email().required(),
-  number: Joi.number().required(),
-  gender: Joi.string().required(),
-});
-
-const employeeValditaion = (req, res, next) => {
-  const body = req.body;
-  const { error, value } = empSchema.schema.validate(body);
-  if (error) return res.status(400).send({ error: error.details[0].message });
-  next();
-};
+const employeeValditaion = [
+  check('first_name').exists().isLength({ min: 6, max: 10 }),
+  check('last_name').exists().isLength({ min: 6, max: 10 }),
+  check('email').isEmail(),
+  check('gender').exists(),
+  check('number').exists(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty())
+      return res.status(422).json({ errors: errors.array() });
+    next();
+  },
+];
 
 module.exports = { employeeValditaion };
