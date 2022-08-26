@@ -19,7 +19,6 @@ export default function UpdateEmployee() {
 
   const [addRequestStatus, setAddRequestStatus] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,

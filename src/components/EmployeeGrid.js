@@ -9,9 +9,7 @@ export default function EmployeeGrid() {
   useEffect(() => {
     dispatch(getEmployees());
   }, [dispatch]);
-
   const employees = useSelector(state => state.employee);
-
   return (
     <div className='grid grid-cols-4 gap-4 p-10 sm:grid-cols-3'>
       {employees.length == 0 ? (

@@ -10,9 +10,6 @@ import ModalContext from '../contextApi/modalContext';
 import { useContext } from 'react';
 
 export default function DeleteEmployee(props) {
-  // const isOpen = useSelector(store => {
-  //   store.modal.isOpen;
-  // });
   const { id, isOpen, closeModal } = useContext(ModalContext);
   const style = {
     position: 'absolute',

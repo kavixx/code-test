@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteEmployee from './DeleteEmployee';
-import { openModal } from '../redux/modalSlice';
 import ModalContext from '../contextApi/modalContext';
 import { useContext } from 'react';
 export default function EmployeeList() {

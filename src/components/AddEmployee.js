@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  addEmployee,
-  getEmployee,
-  selectEmployeeById,
-  updateEmployee,
-} from '../redux/EmployeeSlice';
+import { useDispatch } from 'react-redux';
+import { addEmployee, getEmployee } from '../redux/EmployeeSlice';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import Tosat from './Toast';
 
-function AddEditEmployee() {
+function AddEmployee() {
   const dispatch = useDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
+      //get employee id
       getEmployee(router.query.index);
     }
   }, []);
-
-  const employeeAddStatus = useSelector(state => state.status);
-  const employee = useSelector(state =>
-    selectEmployeeById(state, router.query.index)
-  );
 
   const {
     register,
@@ -37,7 +27,6 @@ function AddEditEmployee() {
   return (
     <>
       {addRequestStatus && <Tosat />}
-
       <div className='flex flex-col justify-center w-screen h-screen'>
         <h5 className='text-green-600 text-lg z-20'>Successful!</h5>
         <div className='flex flex-col justify-center p-10 border border-gray-700 rounded-md sm:m-64 m-8'>
@@ -48,6 +37,7 @@ function AddEditEmployee() {
             </h5>
           </div>
           <form
+            //submit form handle
             onSubmit={handleSubmit(data => {
               try {
                 dispatch(addEmployee(data));
@@ -67,6 +57,7 @@ function AddEditEmployee() {
                   error={errors.first_name?.message}
                   id='first_name'
                   label='First name'
+                  data-testid='first_name'
                   variant='outlined'
                   required
                   size='small'
@@ -81,6 +72,10 @@ function AddEditEmployee() {
                     required: 'First name is required',
                     minLength: { value: 6, message: 'Minimum length is 6' },
                     maxLength: { value: 10, message: 'Maximum length is 10' },
+                    pattern: {
+                      value: /[^A-Za-z]/gi,
+                      message: 'First name can be only alphabets',
+                    },
                   })}
                 />
               </div>
@@ -90,6 +85,7 @@ function AddEditEmployee() {
                   error={errors.last_name?.message}
                   label='Last name'
                   variant='outlined'
+                  data-testid='last_name'
                   required
                   size='small'
                   InputLabelProps={{
@@ -100,6 +96,10 @@ function AddEditEmployee() {
                     required: 'First name is required',
                     minLength: { value: 6, message: 'Minimun length is 6' },
                     maxLength: { value: 10, message: 'Maximum length is 10' },
+                    pattern: {
+                      value: /[^A-Za-z]/gi,
+                      message: 'First name can be only alphabets',
+                    },
                   })}
                 />
               </div>
@@ -110,6 +110,7 @@ function AddEditEmployee() {
                   helperText={errors.email?.message}
                   label='Email'
                   variant='outlined'
+                  data-testid='email'
                   required
                   InputLabelProps={{
                     shrink: true,
@@ -131,6 +132,7 @@ function AddEditEmployee() {
                   helperText={errors.number?.message}
                   label='Mobile number'
                   variant='outlined'
+                  data-testid='number'
                   required
                   size='small'
                   InputLabelProps={{
@@ -151,6 +153,7 @@ function AddEditEmployee() {
                   error={errors.gender?.message}
                   helperText={errors.gender?.message}
                   select
+                  data-testid='gender'
                   label='Gender'
                   size='small'
                   InputLabelProps={{
@@ -179,4 +182,4 @@ function AddEditEmployee() {
   );
 }
 
-export default AddEditEmployee;
+export default AddEmployee;

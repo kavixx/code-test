@@ -11,10 +11,6 @@ import { useSelector } from 'react-redux';
 
 export default function EmployeeView() {
   const [listView, setListView] = useState(true);
-  // const { isOpen } = useSelector(store => {
-  //   store.modal;
-  // });
-
   const changeViewStyle = () => {
     setListView(!listView);
   };
