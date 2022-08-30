@@ -11,10 +11,12 @@ export default function EmployeeGrid() {
   }, [dispatch]);
   const employees = useSelector(state => state.employee);
   return (
-    <div className='grid grid-cols-4 gap-4 p-10 sm:grid-cols-3'>
-      {employees.length == 0 ? (
-        <h2>No Data</h2>
-      ) : (
+    <div
+      className={`grid grid-cols-3 gap-4 p-10 ${
+        employees.length ? 'sm:grid-cols-3' : 'sm:grid-cols-1'
+      }`}
+    >
+      {employees.length ? (
         employees.map(emp => {
           return (
             <GridItem
@@ -28,6 +30,8 @@ export default function EmployeeGrid() {
             />
           );
         })
+      ) : (
+        <label className='text-center font-mono'>No Data!</label>
       )}
     </div>
   );
